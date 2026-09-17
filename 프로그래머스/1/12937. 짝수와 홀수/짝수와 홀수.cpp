@@ -4,12 +4,8 @@
 using namespace std;
 
 string solution(int num) {
-    string answer = "";
-    if (num % 2 == 0) {
-        answer = "Even";
-    }
-    else {
-        answer = "Odd";
-    }
-    return answer;
+    if (num % 2 == 0)
+        return "Even";
+    else
+        return "Odd";
 }
