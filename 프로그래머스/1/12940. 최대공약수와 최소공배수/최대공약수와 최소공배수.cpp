@@ -3,22 +3,16 @@
 
 using namespace std;
 
-int lcd(int n, int m) {
-    if (n > m)
-        if (n % m == 0)
-            return m;
-        else
-            return lcd(m, n % m);
-    else
-        if (m % n == 0)
-            return n;
-        else
-            return lcd(n, m % n);
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
 }
 
 vector<int> solution(int n, int m) {
     vector<int> answer;
-    answer.push_back(lcd(n, m));
-    answer.push_back(n * m / lcd(n, m));
+    int g = gcd(n, m);
+    answer.push_back(g);
+    answer.push_back(n * m / g);
     return answer;
 }
