@@ -10,9 +10,7 @@ int gcd(int a, int b) {
 }
 
 vector<int> solution(int n, int m) {
-    vector<int> answer;
     int g = gcd(n, m);
-    answer.push_back(g);
-    answer.push_back(n * m / g);
-    return answer;
+
+    return {g, n * m / g};
 }
