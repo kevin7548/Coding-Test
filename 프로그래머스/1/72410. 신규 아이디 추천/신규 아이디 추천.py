@@ -1,29 +1,37 @@
 def solution(new_id):
-    # 1단계
+    answer = ''
+    # 1. lower()로 모두 소문자
     new_id = new_id.lower()
-    
-    # *** 2단계 ***
-    allowed = set('abcdefghijklmnopqrstuvwxyz0123456789-_.')
-    new_id = ''.join(c for c in new_id if c in allowed)
-    
-    # *** 3단계 ***
-    while '..' in new_id:
-        new_id = new_id.replace('..', '.')
-    
-    # * 4단계 *
-    new_id = new_id.strip('.')
-    
-    # 5단계
-    if not new_id:
-        new_id = 'a'
-    
-    # 6단계
-    if len(new_id) >= 16:
-        new_id = new_id[:15]
-    new_id = new_id.rstrip('.')
 
-    # 7단계
-    while len(new_id) <= 2:
-        new_id += new_id[-1]
+    # 2. 
+    for char in new_id:
+        if char.isalnum() or char in "-_.":
+            answer += char 
+    
+    # 3. 마침표 2번 이상이면 하나로 (4번 이상이면?)
+    for i in range(len(answer), 1, -1):
+        answer = answer.replace('.'*i, '.')
+    
+    # 4.
+    if answer.startswith('.'):
+        answer = answer[1:]
+    if answer[::-1].startswith('.'):
+        answer = answer[:-1]
+    
+    # 5.
+    if answer == "":
+        answer = "a"
         
-    return new_id
+    # 6.
+    if len(answer) >= 16:
+        answer = answer[:15]
+    if answer[::-1].startswith('.'):
+        answer = answer[:-1]
+    
+    # 7.
+    if len(answer) == 1:
+        answer = answer*3
+    elif len(answer) == 2:
+        answer += answer[-1]
+    
+    return answer
